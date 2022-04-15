@@ -1,16 +1,16 @@
 from abc import abstractmethod
-from domain.constants.hexadecimal import FLAG_STOP, HEXADECIMAL
+from domain.constants.hexadecimal import HEXADECIMAL_FLAG_STOP, HEXADECIMAL
 from domain.entities.binary import BinaryEntity
 from domain.entities.hexadecimal import HexadecimalEntity
 
 
-class BinaryToHexadecimal:
+class BinaryToHexadecimalUsecase:
     @abstractmethod
     def call(self, binaryEntity: BinaryEntity):
         pass
 
 
-class ImplBinaryToHexadecimal(BinaryToHexadecimal):
+class ImplBinaryToHexadecimalUsecase(BinaryToHexadecimalUsecase):
     def call(self, binaryEntity: BinaryEntity):
         binary = binaryEntity.getBinary()
         binary_length = binary.__len__() - 1
@@ -25,10 +25,12 @@ class ImplBinaryToHexadecimal(BinaryToHexadecimal):
 
             cont_flag += 1
 
-            if cont_flag > FLAG_STOP:
-                hexadecimal += HEXADECIMAL[sum]
+            if cont_flag > HEXADECIMAL_FLAG_STOP:
+                hexadecimal = HEXADECIMAL[sum] + hexadecimal
 
                 sum = 0
                 cont_flag = 0
 
-        return HexadecimalEntity.createEntity(''.join(reversed(hexadecimal)))
+        hexadecimal = (str(sum) if sum != 0 else '') + hexadecimal
+
+        return HexadecimalEntity.createEntity(hexadecimal)

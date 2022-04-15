@@ -1,5 +1,5 @@
 from domain.constants.hexadecimal import HEXADECIMAL
-from domain.errors.hexadecimal_is_not_legit import HexadecimalIsNotLegit
+from domain.errors.hexadecimal_is_not_legit import HexadecimalIsNotLegitError
 
 
 class HexadecimalEntity:
@@ -17,7 +17,7 @@ class HexadecimalEntity:
     @staticmethod
     def createEntity(hexadecimal: int):
         if not HexadecimalEntity.__hexadecimalIsLegit(hexadecimal):
-            return HexadecimalIsNotLegit()
+            return HexadecimalIsNotLegitError()
 
         return HexadecimalEntity(hexadecimal)
 

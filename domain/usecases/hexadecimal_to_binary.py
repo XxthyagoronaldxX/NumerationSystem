@@ -7,12 +7,12 @@ from domain.entities.decimal import DecimalEntity
 from domain.entities.hexadecimal import HexadecimalEntity
 from domain.usecases.decimal_to_binary import DecimalToBinaryUsecase
 
-class HexadecimalToBinary:
+class HexadecimalToBinaryUsecase:
     @abstractmethod
     def call(self, hexadecimalEntity: HexadecimalEntity):
         pass
 
-class ImplHexadecimalToBinary(HexadecimalToBinary):
+class ImplHexadecimalToBinaryUsecase(HexadecimalToBinaryUsecase):
     def __init__(self, decimalToBinaryUsecase: DecimalToBinaryUsecase):
         self._decimalToBinaryUsecase = decimalToBinaryUsecase
 
@@ -28,7 +28,7 @@ class ImplHexadecimalToBinary(HexadecimalToBinary):
 
             decimalEntity = DecimalEntity.createEntity(decimal)
 
-            binaryEntity = self._decimalToBinaryUsecase.call(decimalEntity)
+            binaryEntity = self._decimalToBinaryUsecase.call(decimalEntity, 4)
 
             binary = binaryEntity.getBinary() + binary
         

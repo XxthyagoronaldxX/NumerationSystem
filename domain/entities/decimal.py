@@ -1,5 +1,3 @@
-from asyncio.windows_events import NULL
-
 class DecimalEntity:
   def __init__(self, decimal: int):
     self._decimal = decimal
