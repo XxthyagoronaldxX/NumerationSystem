@@ -1,11 +1,11 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from domain.entities.binary import BinaryEntity
 from domain.entities.decimal import DecimalEntity
 
 from domain.entities.octal import OctalEntity
 from domain.usecases.decimal_to_binary import DecimalToBinaryUsecase
 
-class OctalToBinaryUsecase:
+class OctalToBinaryUsecase(ABC):
     @abstractmethod
     def call(octalEntity: OctalEntity):
         pass

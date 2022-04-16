@@ -1,9 +1,9 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from domain.constants.octal import OCTAL_FLAG_STOP
 from domain.entities.binary import BinaryEntity
 from domain.entities.octal import OctalEntity
 
-class BinaryToOctalUsecase():
+class BinaryToOctalUsecase(ABC):
     @abstractmethod
     def call(binaryEntity: BinaryEntity):
         pass

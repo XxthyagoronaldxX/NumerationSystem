@@ -1,9 +1,9 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from domain.entities.binary import BinaryEntity
 from domain.entities.decimal import DecimalEntity
 
 
-class BinaryToDecimalUsecase:
+class BinaryToDecimalUsecase(ABC):
     @abstractmethod
     def call(self, binaryEntity: BinaryEntity):
         pass

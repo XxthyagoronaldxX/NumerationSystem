@@ -1,10 +1,10 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from domain.constants.hexadecimal import HEXADECIMAL_FLAG_STOP, HEXADECIMAL
 from domain.entities.binary import BinaryEntity
 from domain.entities.hexadecimal import HexadecimalEntity
 
 
-class BinaryToHexadecimalUsecase:
+class BinaryToHexadecimalUsecase(ABC):
     @abstractmethod
     def call(self, binaryEntity: BinaryEntity):
         pass

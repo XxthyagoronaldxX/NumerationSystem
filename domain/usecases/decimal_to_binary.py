@@ -1,10 +1,10 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from math import floor
 from domain.entities.binary import BinaryEntity
 from domain.entities.decimal import DecimalEntity
 
 
-class DecimalToBinaryUsecase:
+class DecimalToBinaryUsecase(ABC):
     @abstractmethod
     def call(self, decimalEntity: DecimalEntity, bold: int = 0):
         pass

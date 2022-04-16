@@ -1,4 +1,5 @@
 import os
+from domain.usecases.sum_binary import ImplSumBinaryUsecase
 from domain.entities.decimal import DecimalEntity
 from domain.entities.hexadecimal import HexadecimalEntity
 from domain.entities.octal import OctalEntity
@@ -100,4 +101,8 @@ def main():
         os.system('pause')
 
 
-main()
+binary01 = BinaryEntity.createEntity('1011')
+binary02 = BinaryEntity.createEntity('1001')
+usecase = ImplSumBinaryUsecase()
+result = usecase.call(binary01, binary02)
+print(result)

@@ -1,4 +1,4 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from unicodedata import decimal
 from domain.constants.hexadecimal import HEXADECIMAL
 from domain.entities.binary import BinaryEntity
@@ -7,7 +7,7 @@ from domain.entities.decimal import DecimalEntity
 from domain.entities.hexadecimal import HexadecimalEntity
 from domain.usecases.decimal_to_binary import DecimalToBinaryUsecase
 
-class HexadecimalToBinaryUsecase:
+class HexadecimalToBinaryUsecase(ABC):
     @abstractmethod
     def call(self, hexadecimalEntity: HexadecimalEntity):
         pass
