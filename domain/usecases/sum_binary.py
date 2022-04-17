@@ -1,16 +1,30 @@
 from abc import ABC, abstractmethod
 
 from domain.entities.binary import BinaryEntity
+from domain.errors.binary_is_not_legit import BinaryIsNotLegitError
+from domain.errors.something_went_wrong import SomethingWentWrong
 
 
 class SumBinaryUsecase(ABC):
     @abstractmethod
-    def call(self, binaryEntity01: BinaryEntity, binaryEntity02: BinaryEntity):
+    def call(self, binary01: str, binary02: str):
         pass
 
 
 class ImplSumBinaryUsecase(SumBinaryUsecase):
-    def call(self, binaryEntity01: BinaryEntity, binaryEntity02: BinaryEntity):
+    def call(self, binary01: str, binary02: str):
+        try:
+            binaryEntityOrError01 = BinaryEntity.createEntity(binary01)
+            binaryEntityOrError02 = BinaryEntity.createEntity(binary02)
+
+            if type(binaryEntityOrError01) is BinaryIsNotLegitError or type(binaryEntityOrError02) is BinaryIsNotLegitError:
+                return BinaryIsNotLegitError()
+
+            return self._sumBinary(binaryEntityOrError01, binaryEntityOrError02)
+        except:
+            return SomethingWentWrong()
+    
+    def _sumBinary(self, binaryEntity01: BinaryEntity, binaryEntity02: BinaryEntity):
         binary01 = binaryEntity01.getBinary()
         binary02 = binaryEntity02.getBinary()
         go_one = False

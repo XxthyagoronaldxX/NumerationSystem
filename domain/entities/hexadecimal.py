@@ -21,5 +21,8 @@ class HexadecimalEntity:
 
         return HexadecimalEntity(hexadecimal)
 
+    def getLength(self):
+        return self._hexadecimal.__len__() - 1
+
     def getHexadecimal(self):
         return self._hexadecimal

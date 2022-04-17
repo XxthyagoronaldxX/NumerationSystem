@@ -20,5 +20,8 @@ class OctalEntity:
 
         return OctalEntity(octal)
     
+    def getLength(self):
+        return self._octal.__len__() - 1
+
     def getOctal(self):
         return self._octal

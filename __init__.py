@@ -1,3 +1,4 @@
+from decimal import Decimal
 import os
 from domain.usecases.sum_binary import ImplSumBinaryUsecase
 from domain.entities.decimal import DecimalEntity
@@ -15,103 +16,146 @@ from presentation.config.option_main import *
 from domain.entities.binary import BinaryEntity
 from domain.usecases.binary_to_decimal import ImplBinaryToDecimalUsecase
 
+decimalToBinaryUsecase: DecimalToBinaryUsecase = ImplDecimalToBinaryUsecase()
+
+def screenTitle():
+    print('===================================================')
+    print('====      By TCKUBIRIM - NumerationSystem      ====')
+    print('===================================================')
+
+
+def screenOptions():
+    print('{} - Binary to decimal.'.format(BINARY_TO_DECIMAL))
+    print('{} - Binary to hexadecimal.'.format(BINARY_TO_HEXADECIMAL))
+    print('{} - Binary to octal.'.format(BINARY_TO_OCTAL))
+    print('{} - Decimal to binary.'.format(DECIMAL_TO_BINARY))
+    print('{} - Hexadecimal to binary.'.format(HEXADECIMAL_TO_BINARY))
+    print('{} - Octal to binary.'.format(OCTAL_TO_BINARY))
+    print('{} - Sum binary.'.format(SUM_BINARY))
+    print('{} - Sair.'.format(EXIT))
+
+
+def binaryToDecimal():
+    binary = input(
+        'Informe o valor em binário para fazer a conversão (Binary to Decimal): ')
+
+    decimalEntityOrError = ImplBinaryToDecimalUsecase().call(binary)
+
+    if type(decimalEntityOrError) is DecimalEntity:
+        print('O valor convertido [{}] em decimal é: {}'.format(
+            binary, decimalEntityOrError.getDecimal()
+        ))
+    else:
+        print(decimalEntityOrError)
+
+
+def binaryToHexadecimal():
+    binary = input(
+        'Informe o valor em binário para fazer a conversão (Binary to Hexadecimal): ')
+
+    hexadecimalEntityOrError = ImplBinaryToHexadecimalUsecase().call(binary)
+
+    if type(hexadecimalEntityOrError) is HexadecimalEntity:
+        print('O valor convertido [{}] em Hexadecimal é: {}'.format(
+            binary, hexadecimalEntityOrError.getHexadecimal()))
+    else:
+        print(hexadecimalEntityOrError)
+
+
+def binaryToOctal():
+    binary = input(
+        'Informe o valor em binário para fazer a conversão (Binary to Octal): ')
+
+    octalEntityOrError = ImplBinaryToOctalUsecase().call(binary)
+
+    if type(octalEntityOrError) is OctalEntity:
+        print('O valor convertido [{}] em Octal é: {}'.format(
+            binary, octalEntityOrError.getOctal()))
+    else:
+        print(octalEntityOrError)
+
+
+def decimalToBinary():
+    decimal = int(
+        input('Informe o valor em Decimal para fazer a conversão (Decimal to binary): '))
+
+    binaryEntityOrError = ImplDecimalToBinaryUsecase().call(decimal)
+
+    if type(binaryEntityOrError) is BinaryEntity:
+        print('O valor convertido [{}] em Binario é: {}'.format(
+            decimal, binaryEntityOrError.getBinary()))
+    else:
+        print(binaryEntityOrError)
+
+
+def hexadecimalToBinary():
+    hexadecimal = input(
+        'Informe o valor em Hexadecimal para fazer a conversão (Hexadecimal to binary): '
+    )
+
+    binaryEntityOrError = ImplHexadecimalToBinaryUsecase(decimalToBinaryUsecase).call(hexadecimal)
+
+    if type(binaryEntityOrError) is BinaryEntity:
+        print('O valor convertido [{}] em Binario é: {}'.format(
+            hexadecimal, binaryEntityOrError.getBinary()))
+    else:
+        print(binaryEntityOrError)
+
+
+def octalToBinary():
+    octal = input(
+        'Informe o valor em Octal para fazer a conversão (Octal to binary): ')
+
+    binaryEntityOrError = ImplOctalToBinaryUsecase(
+        decimalToBinaryUsecase).call(octal)
+
+    if type(binaryEntityOrError) is BinaryEntity:
+        print('O valor convertido [{}] em Binario é: {}'.format(
+            octal, binaryEntityOrError.getBinary()))
+    else:
+        print(binaryEntityOrError)
+
+
+def sumBinary():
+    binary01 = input(
+        'Informe o primeiro Binário para ser realizado a soma: ')
+    binary02 = input(
+        'Informe o segundo Binário para ser realizado a soma: ')
+
+    binaryEntityOrError = ImplSumBinaryUsecase().call(binary01, binary02)
+
+    if type(binaryEntityOrError) is BinaryEntity:
+        print('O valor resultante da soma entre [ {} + {} ] é igual a: {}'.format(
+            binary01, binary02, binaryEntityOrError.getBinary()))
+    else:
+        print(binaryEntityOrError)
+
+
 def main():
-    decimalToBinaryUsecase: DecimalToBinaryUsecase = ImplDecimalToBinaryUsecase()
     option = DEFAULT_OPTION
 
     while(option != EXIT):
         os.system('cls') or None
-        print('===================================================')
-        print('====      By TCKUBIRIM - NumerationSystem      ====')
-        print('===================================================')
-        print('{} - Binary to decimal.'.format(BINARY_TO_DECIMAL))
-        print('{} - Binary to hexadecimal.'.format(BINARY_TO_HEXADECIMAL))
-        print('{} - Binary to octal.'.format(BINARY_TO_OCTAL))
-        print('{} - Decimal to binary.'.format(DECIMAL_TO_BINARY))
-        print('{} - Hexadecimal to binary.'.format(HEXADECIMAL_TO_BINARY))
-        print('{} - Octal to binary.'.format(OCTAL_TO_BINARY))
-        print('{} - Sum binary.'.format(SUM_BINARY))
-        print('{} - Sair.'.format(EXIT))
+        screenTitle()
+        screenOptions()
         option = input('Escolha uma opção: ')
 
         os.system('cls') or None
         if option == BINARY_TO_DECIMAL:
-            binary = input('Informe o valor em binário para fazer a conversão (Binary to Decimal): ')
-            
-            binaryEntityOrError = BinaryEntity.createEntity(binary)
-
-            if type(binaryEntityOrError) is BinaryIsNotLegitError:
-                print('Você deve inserir um valor em binário válido!')
-           
-            decimalEntity = ImplBinaryToDecimalUsecase().call(binaryEntityOrError)
-
-            print('O valor convertido [{}] em decimal é: {}'.format(binary, decimalEntity.getDecimal()))
+            binaryToDecimal()
         elif option == BINARY_TO_HEXADECIMAL:
-            binary = input('Informe o valor em binário para fazer a conversão (Binary to Hexadecimal): ')
-            
-            binaryEntityOrError = BinaryEntity.createEntity(binary)
-
-            if type(binaryEntityOrError) is BinaryIsNotLegitError:
-                print('Você deve inserir um valor em binário válido!')
-            
-            hexadecimalEntity = ImplBinaryToHexadecimalUsecase().call(binaryEntityOrError)
-
-            print('O valor convertido [{}] em Hexadecimal é: {}'.format(binary, hexadecimalEntity.getHexadecimal()))
+            binaryToHexadecimal()
         elif option == BINARY_TO_OCTAL:
-            binary = input('Informe o valor em binário para fazer a conversão (Binary to Octal): ')
-            
-            binaryEntityOrError = BinaryEntity.createEntity(binary)
-
-            if type(binaryEntityOrError) is BinaryIsNotLegitError:
-                print('Você deve inserir um valor em binário válido!')
-           
-            hexadecimalEntity = ImplBinaryToOctalUsecase().call(binaryEntityOrError)
-
-            print('O valor convertido [{}] em Octal é: {}'.format(binary, hexadecimalEntity.getOctal()))
+            binaryToOctal()
         elif option == DECIMAL_TO_BINARY:
-            decimal = int(input('Informe o valor em Decimal para fazer a conversão (Decimal to binary): '))
-
-            decimalEntity = DecimalEntity.createEntity(decimal)
-
-            binaryEntity = ImplDecimalToBinaryUsecase().call(decimalEntity)
-
-            print('O valor convertido [{}] em Binario é: {}'.format(decimal, binaryEntity.getBinary()))
+            decimalToBinary()
         elif option == HEXADECIMAL_TO_BINARY:
-            hexadecimal = input('Informe o valor em Hexadecimal para fazer a conversão (Hexadecimal to binary): ')
-
-            hexadecimalEntityOrError = HexadecimalEntity.createEntity(hexadecimal)
-
-            if type(hexadecimalEntityOrError) is HexadecimalIsNotLegitError:
-                print('Você deve inserir um valor em Hexadecimal válido!')
-
-            binaryEntity = ImplHexadecimalToBinaryUsecase(decimalToBinaryUsecase).call(hexadecimalEntityOrError)
-
-            print('O valor convertido [{}] em Binario é: {}'.format(hexadecimal, binaryEntity.getBinary()))
+            hexadecimalToBinary()
         elif option == OCTAL_TO_BINARY:
-            octal = input('Informe o valor em Octal para fazer a conversão (Octal to binary): ')
-
-            octalEntityOrError = OctalEntity.createEntity(octal)
-
-            if type(octalEntityOrError) is OctalIsNotLegitError:
-                print('Você deve inserir um valor em Octal válido!')
-
-            binaryEntity = ImplOctalToBinaryUsecase(decimalToBinaryUsecase).call(octalEntityOrError)
-
-            print('O valor convertido [{}] em Binario é: {}'.format(octal, binaryEntity.getBinary()))
+            octalToBinary()
         elif option == SUM_BINARY:
-            binary01 = input('Informe o primeiro Binário para ser realizado a soma: ')
-            binary02 = input('Informe o segundo Binário para ser realizado a soma: ')
-
-            binaryEntityOrError01 = BinaryEntity.createEntity(binary01)
-            binaryEntityOrError02 = BinaryEntity.createEntity(binary02)
-
-            if type(binaryEntityOrError01) is BinaryIsNotLegitError or type(binaryEntityOrError02) is BinaryIsNotLegitError:
-                print('Você deve inserir um valor em Binário válido!')
-            
-            binaryEntity = ImplSumBinaryUsecase().call(binaryEntityOrError01, binaryEntityOrError02)
-
-            print('O valor resultante da soma entre [ {} + {} ] é igual a: {}'.format(binary01, binary02, binaryEntity.getBinary()))
-
+            sumBinary()
         os.system('pause')
+
 
 main()

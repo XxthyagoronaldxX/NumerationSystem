@@ -2,23 +2,26 @@ from domain.errors.binary_is_not_legit import BinaryIsNotLegitError
 
 
 class BinaryEntity:
-  def __init__(self, binary: str):
-    self._binary = binary 
+    def __init__(self, binary: str):
+        self._binary = binary
 
-  @staticmethod
-  def __binaryIsLegit(binary: str):
-    for i in binary:
-      if i != '0' and i != '1':
-        return False
+    @staticmethod
+    def __binaryIsLegit(binary: str):
+        for i in binary:
+            if i != '0' and i != '1':
+                return False
 
-    return True
-  
-  @staticmethod
-  def createEntity(binary: str):
-    if not BinaryEntity.__binaryIsLegit(binary):
-      return BinaryIsNotLegitError()
+        return True
 
-    return BinaryEntity(binary)
+    @staticmethod
+    def createEntity(binary: str):
+        if not BinaryEntity.__binaryIsLegit(binary):
+            return BinaryIsNotLegitError()
 
-  def getBinary(self):
-    return self._binary
+        return BinaryEntity(binary)
+
+    def getLength(self):
+        return self._binary.__len__() -1
+
+    def getBinary(self):
+        return self._binary

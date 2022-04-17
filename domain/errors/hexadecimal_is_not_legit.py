@@ -1,3 +1,3 @@
 class HexadecimalIsNotLegitError(Exception):
-    def __init__(self):
-        super().__init__('HexadecimalIsNotLegit')
+    def __init__(self, message='HexadecimalIsNotLegit'):
+        super().__init__(message)
