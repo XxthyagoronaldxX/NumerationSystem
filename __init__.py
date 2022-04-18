@@ -1,6 +1,7 @@
 from decimal import Decimal
 import os
-from domain.usecases.sum_binary import ImplSumBinaryUsecase
+from domain.usecases.multiply_binary import ImplMultiplyBinaryUsecase
+from domain.usecases.sum_binary import ImplSumBinaryUsecase, SumBinaryUsecase
 from domain.entities.decimal import DecimalEntity
 from domain.entities.hexadecimal import HexadecimalEntity
 from domain.entities.octal import OctalEntity
@@ -17,6 +18,7 @@ from domain.entities.binary import BinaryEntity
 from domain.usecases.binary_to_decimal import ImplBinaryToDecimalUsecase
 
 decimalToBinaryUsecase: DecimalToBinaryUsecase = ImplDecimalToBinaryUsecase()
+sumBinaryUsecase: SumBinaryUsecase = ImplSumBinaryUsecase()
 
 def screenTitle():
     print('===================================================')
@@ -32,6 +34,7 @@ def screenOptions():
     print('{} - Hexadecimal to binary.'.format(HEXADECIMAL_TO_BINARY))
     print('{} - Octal to binary.'.format(OCTAL_TO_BINARY))
     print('{} - Sum binary.'.format(SUM_BINARY))
+    print('{} - Multiply binary.'.format(MULTIPLY_BINARY))
     print('{} - Sair.'.format(EXIT))
 
 
@@ -131,6 +134,20 @@ def sumBinary():
         print(binaryEntityOrError)
 
 
+def multiplyBinary():
+    binary01 = input(
+        'Informe o primeiro Binário para ser realizado a multiplicação: ')
+    binary02 = input(
+        'Informe o segundo Binário para ser realizado a multiplicação: ')
+
+    binaryEntityOrError = ImplMultiplyBinaryUsecase(sumBinaryUsecase).call(binary01, binary02)
+
+    if type(binaryEntityOrError) is BinaryEntity:
+        print('O valor resultante da multiplicação entre [ {} + {} ] é igual a: {}'.format(
+            binary01, binary02, binaryEntityOrError.getBinary()))
+    else:
+        print(binaryEntityOrError)
+
 def main():
     option = DEFAULT_OPTION
 
@@ -155,6 +172,8 @@ def main():
             octalToBinary()
         elif option == SUM_BINARY:
             sumBinary()
+        elif option == MULTIPLY_BINARY:
+            multiplyBinary()
         os.system('pause')
 
 
