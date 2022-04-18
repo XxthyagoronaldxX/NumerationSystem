@@ -1,6 +1,7 @@
 from decimal import Decimal
 import os
 from domain.usecases.multiply_binary import ImplMultiplyBinaryUsecase
+from domain.usecases.subtract_binary import ImplSubtractBinaryUsecase
 from domain.usecases.sum_binary import ImplSumBinaryUsecase, SumBinaryUsecase
 from domain.entities.decimal import DecimalEntity
 from domain.entities.hexadecimal import HexadecimalEntity
@@ -35,6 +36,7 @@ def screenOptions():
     print('{} - Octal to binary.'.format(OCTAL_TO_BINARY))
     print('{} - Sum binary.'.format(SUM_BINARY))
     print('{} - Multiply binary.'.format(MULTIPLY_BINARY))
+    print('{} - Subtract binary.'.format(SUBTRACT_BINARY))
     print('{} - Sair.'.format(EXIT))
 
 
@@ -148,6 +150,20 @@ def multiplyBinary():
     else:
         print(binaryEntityOrError)
 
+def subtractBinary():
+    binary01 = input(
+        'Informe o primeiro Binário para ser realizado a subtração: ')
+    binary02 = input(
+        'Informe o segundo Binário para ser realizado a subtração: ')
+
+    binaryEntityOrError = ImplSubtractBinaryUsecase(sumBinaryUsecase).call(binary01, binary02)
+
+    if type(binaryEntityOrError) is BinaryEntity:
+        print('O valor resultante da subtração entre [ {} + {} ] é igual a: {}'.format(
+            binary01, binary02, binaryEntityOrError.getBinary()))
+    else:
+        print(binaryEntityOrError)
+
 def main():
     option = DEFAULT_OPTION
 
@@ -174,6 +190,8 @@ def main():
             sumBinary()
         elif option == MULTIPLY_BINARY:
             multiplyBinary()
+        elif option == SUBTRACT_BINARY:
+            subtractBinary()
         os.system('pause')
 
 
