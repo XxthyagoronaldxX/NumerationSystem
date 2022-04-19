@@ -47,7 +47,11 @@ class ImplSubtractBinaryUsecase(SubtractBinaryUsecase):
         binary01 = binaryEntity01.getBinary()
         binary02 = binaryEntity02.getBinary()
         
-        #binary02 = (binaryEntity01.getLength() - binaryEntity02.getLength())
+        if binary01.__len__() > binary02.__len__():
+            binary02 = '0'*(binary01.__len__()-binary02.__len__()) + binary02
+        else:
+            binary01 = '0'*(binary02.__len__()-binary01.__len__()) + binary01
+        
         binary02 = self._complementOne(binary02)
         binary02 = self._complementTwo(binary02)
 
