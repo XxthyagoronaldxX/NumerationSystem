@@ -145,7 +145,7 @@ def multiplyBinary():
     binaryEntityOrError = ImplMultiplyBinaryUsecase(sumBinaryUsecase).call(binary01, binary02)
 
     if type(binaryEntityOrError) is BinaryEntity:
-        print('O valor resultante da multiplicação entre [ {} + {} ] é igual a: {}'.format(
+        print('O valor resultante da multiplicação entre [ {} x {} ] é igual a: {}'.format(
             binary01, binary02, binaryEntityOrError.getBinary()))
     else:
         print(binaryEntityOrError)
@@ -159,7 +159,7 @@ def subtractBinary():
     binaryEntityOrError = ImplSubtractBinaryUsecase(sumBinaryUsecase).call(binary01, binary02)
 
     if type(binaryEntityOrError) is BinaryEntity:
-        print('O valor resultante da subtração entre [ {} + {} ] é igual a: {}'.format(
+        print('O valor resultante da subtração entre [ {} - {} ] é igual a: {}'.format(
             binary01, binary02, binaryEntityOrError.getBinary()))
     else:
         print(binaryEntityOrError)
