@@ -18,6 +18,11 @@
 <h2> Como utilizar? </h2>
 <figure>
   <img src='https://user-images.githubusercontent.com/16446463/163992289-b58a189f-b174-4ef5-9b97-f742a62e8cf6.PNG' alt='NumerationSystem_main'/>
+  <figcaption> Você deve selecionar uma opção, e depois informar o valor necessário para que a operação seja realizada com sucesso.</figcaption>
 </figure>
-<p> Você deve selecionar uma opção, e depois informar o valor necessário para que a operação seja realizada com sucesso.</p>
+<figure>
+  <img src='https://user-images.githubusercontent.com/16446463/163992992-8083e081-b780-420a-83f9-e23d678d6bfc.PNG' alt='NumerationSystem_example'/>
+  <figcaption> Nesse examplo foi selecionado a Opção 01 (Binary para Decimal), e foi pedido para o usuário um valor binário. Depois é retornado um valor em decimal      convertido corretamente. </figcaption>
+</figure>
+
 
