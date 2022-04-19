@@ -16,4 +16,8 @@
 </ol>
 
 <h2> Como utilizar? </h2>
-<
+<figure>
+  <img src='https://user-images.githubusercontent.com/16446463/163992289-b58a189f-b174-4ef5-9b97-f742a62e8cf6.PNG' alt='NumerationSystem_main'/>
+</figure>
+<p> Você deve selecionar uma opção, e depois informar o valor necessário para que a operação seja realizada com sucesso.</p>
+
