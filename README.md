@@ -1,6 +1,6 @@
 # NumerationSystem
 <h2> Objetivo do projeto </h2>
-<p> O projeto teve como intuito criar um programa simples responsável pela conversão de valores Binários para Hexadecimal, Decimal e Octal e vice-versa, e três operações aritméticas que são soma, subtração e multiplicação entre os valores binários.</p>
+<p> O projeto teve como intuito aprender mais sobre a sintaxe do python e implementar um pouco de clean architecture. O programa consiste em converter valores Binários para Hexadecimal, Decimal e Octal e vice-versa, e realizar três operações aritméticas que são eles soma, subtração e multiplicação entre os valores binários.</p>
 
 <h2> Casos de uso </h2>
 <ol>
